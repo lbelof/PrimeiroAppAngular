@@ -3,7 +3,7 @@ import { NgModule, LOCALE_ID } from "@angular/core";
 import { HttpModule } from "@angular/http";
 import { RouterModule } from "@angular/router";
 import { ROUTES } from "./app.routes";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, FormBuilder, ReactiveFormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
@@ -24,6 +24,8 @@ import { OrderItemsComponent } from './order/order-items/order-items.component';
 import { OrderService } from "./order/order.service";
 import { DeliveryCostsComponent } from './order/delivery-costs/delivery-costs.component';
 import { RadioComponent } from './shared/radio/radio.component';
+import { OrderSumaryComponent } from './order-sumary/order-sumary.component';
+import { RatingComponent } from './shared/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -42,13 +44,16 @@ import { RadioComponent } from './shared/radio/radio.component';
     InputComponent,
     OrderItemsComponent,
     DeliveryCostsComponent,
-    RadioComponent
+    RadioComponent,
+    OrderSumaryComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     RouterModule.forRoot(ROUTES),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     RestaurantsService,

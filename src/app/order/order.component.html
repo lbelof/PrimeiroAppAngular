@@ -3,9 +3,8 @@
 
 <section class="content">
   <section class="invoice">
-    {{ form.valid }}
-    {{ form.value | json }}
-    <form #form="ngForm" novalidate>
+
+    <form [formGroup]="orderForm" novalidate>
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
@@ -14,24 +13,46 @@
         </div>
       </div>
 
-      <div class="row invoice-info">
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="lead">Seus dados</p>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+          <mt-input-container errorMessage="Campo obrigatório" label="Nome">
+            <input class="form-control" formControlName="name" placeholder="Nome" autocomplete="off" />
+          </mt-input-container>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+          <mt-input-container errorMessage="Email inválido" label="Email">
+            <input class="form-control" formControlName="email" placeholder="Email" autocomplete="off" />
+          </mt-input-container>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+          <mt-input-container errorMessage="Email inválido" label="Confirmação de Email">
+            <input class="form-control" formControlName="emailConfirmation" placeholder="Confirmação de Email"
+              autocomplete="off" />
+          </mt-input-container>
+        </div>
+      </div>
+
+      <div class="row ">
         <div class="col-xs-12">
           <p class="lead">Endereço de Entrega:</p>
         </div>
         <div class="col-sm-6 col-xs-12">
           <mt-input-container errorMessage="Campo obrigatório" label="Endereço">
-            <input class="form-control" name="address" ngModel required minlength="5" autocomplete="off"
-              placeholder="Endereço" />
+            <input class="form-control" formControlName="address" placeholder="Endereço" autocomplete="off" />
           </mt-input-container>
         </div>
         <div class="col-sm-2 col-xs-6">
           <mt-input-container errorMessage="Campo obrigatório" label="Número">
-            <input class="form-control" name="number" ngModel required autocomplete="off" placeholder="Número" />
+            <input class="form-control" formControlName="number" autocomplete="off" />
           </mt-input-container>
         </div>
         <div class="col-sm-4 col-xs-6">
           <mt-input-container errorMessage="Campo obrigatório" label="Número">
-            <input class="form-control" name="optionalAddress" ngModel autocomplete="off" placeholder="Complemento" />
+            <input class="form-control" formControlName="optionalAddress" placeholder="Complemento"
+              autocomplete="off" />
           </mt-input-container>
         </div>
         <!-- /.col -->
@@ -56,7 +77,7 @@
           <p class="lead">Formas de Pagamento:</p>
 
           <div class="form-group">
-            <mt-radio [options]="paymentOptions" name="paymentOption" ngModel required></mt-radio>
+            <mt-radio [options]="paymentOptions" formControlName="paymentOption"></mt-radio>
           </div>
         </div>
         <!-- /.col -->
@@ -71,8 +92,8 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <button class="btn btn-success pull-right" [disabled]="(!form.valid || cartItems().length === 0)"
-          (click)="checkOrder(form.value)">
+        <button class="btn btn-success pull-right" [disabled]="(!orderForm.valid || cartItems().length === 0)"
+          (click)="checkOrder(orderForm.value)">
           <i class="fa fa-credit-card"></i> Concluir Pedido
         </button>
       </div>
